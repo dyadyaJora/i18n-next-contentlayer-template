@@ -34,3 +34,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .contentlayer
+
+# tmp
+package-lock.json
+/app/i18n/client.ts

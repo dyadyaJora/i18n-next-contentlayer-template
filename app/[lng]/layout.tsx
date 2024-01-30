@@ -4,6 +4,17 @@ import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@/components/analytics"
 import { ModeToggle } from "@/components/mode-toggle"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { dir } from 'i18next'
+import { languages, fallbackLng } from '../i18n/settings'
+import fs from 'fs'
+import path from "path"
+// import { useTranslation } from '../i18n/client'
+import { useTranslation } from '../i18n'
+
+// import { useTranslation } from 'react-i18next'
+// import i18next from '../i18n/custom'
+
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -16,9 +27,24 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+
+export async function generateStaticParams() {
+  return languages.map((lng) => ({ lng }))
+}
+
+export default async function RootLayout({
+  children,
+  params: {
+    lng
+  }
+}: any) {
+  if (!languages.includes(lng)) {
+    return;
+  }
+// eslint-disable-next-line
+  const { t } = await useTranslation(lng, 'menu')
   return (
-    <html lang="en">
+    <html lang={lng} dir={dir(lng)}>
       <body
         className={`antialiased min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 ${inter.className}`}
       >
@@ -27,9 +53,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <header>
               <div className="flex items-center justify-between">
                 <ModeToggle />
+                <LanguageSwitcher/>
                 <nav className="ml-auto text-sm font-medium space-x-6">
-                  <Link href="/">Home</Link>
-                  <Link href="/about">About</Link>
+                  <Link href={`/${lng}/`}>{t('home')}</Link>
+                  <Link href={`/${lng}/about`}>{t('about')}</Link>
                 </nav>
               </div>
             </header>

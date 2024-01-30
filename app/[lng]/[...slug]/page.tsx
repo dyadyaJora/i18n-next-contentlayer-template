@@ -6,13 +6,15 @@ import { Mdx } from "@/components/mdx-components"
 
 interface PageProps {
   params: {
-    slug: string[]
+    slug: string[],
+    lng: string
   }
 }
 
 async function getPageFromParams(params: PageProps["params"]) {
   const slug = params?.slug?.join("/")
-  const page = allPages.find((page) => page.slugAsParams === slug)
+  const lng = params?.lng
+  const page = allPages.find((page) => page.slugAsParams === slug && page.lng === lng)
 
   if (!page) {
     null
@@ -39,6 +41,7 @@ export async function generateMetadata({
 export async function generateStaticParams(): Promise<PageProps["params"][]> {
   return allPages.map((page) => ({
     slug: page.slugAsParams.split("/"),
+    lng: page.lng
   }))
 }
 
