@@ -7,13 +7,7 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { dir } from 'i18next'
 import { languages, fallbackLng } from '../i18n/settings'
-import fs from 'fs'
-import path from "path"
-// import { useTranslation } from '../i18n/client'
 import { useTranslation } from '../i18n'
-
-// import { useTranslation } from 'react-i18next'
-// import i18next from '../i18n/custom'
 
 
 const inter = Inter({ subsets: ["latin"] })
@@ -24,7 +18,10 @@ export const metadata = {
 }
 
 interface RootLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode,
+  params: {
+    lng: string
+  }
 }
 
 
@@ -37,7 +34,7 @@ export default async function RootLayout({
   params: {
     lng
   }
-}: any) {
+}: RootLayoutProps) {
   if (!languages.includes(lng)) {
     return;
   }
