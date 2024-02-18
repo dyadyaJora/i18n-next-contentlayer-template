@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { selfNames } from '@/app/i18n/settings'
 
-export function LanguageSwitcher() {
+export function LanguageSwitcher({ selectedLocale }: { selectedLocale: string }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -33,6 +33,10 @@ export function LanguageSwitcher() {
     return `/${pathSegments.join('/')}`;
   };
 
+  const isActive = (lng: string): boolean => {
+    return lng === selectedLocale;
+  };
+
   return (
     <div className="relative" ref={dropdownRef}>
       <button
@@ -49,7 +53,7 @@ export function LanguageSwitcher() {
             <a
             href={buildLanguageLink(lng)}
             key={lng}
-            className="block px-4 py-2 hover:bg-gray-100 hover:text-slate-900"
+            className={"block px-4 py-2 hover:bg-gray-100 hover:text-slate-900" + (isActive(lng) ? " checkmarks" : "")}
             >
             {selfNames[lng]}
             </a>)

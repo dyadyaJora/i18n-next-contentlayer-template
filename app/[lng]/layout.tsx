@@ -50,7 +50,7 @@ export default async function RootLayout({
             <header>
               <div className="flex items-center justify-between">
                 <ModeToggle />
-                <LanguageSwitcher/>
+                <LanguageSwitcher selectedLocale={lng}/>
                 <nav className="ml-auto text-sm font-medium space-x-6">
                   <Link href={`/${lng}/`}>{t('home')}</Link>
                   <Link href={`/${lng}/about`}>{t('about')}</Link>
