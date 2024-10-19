@@ -9,3 +9,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    ignore:
+      # Ignore major version updates for the Next.js package
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
