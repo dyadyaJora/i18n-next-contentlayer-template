@@ -19,7 +19,7 @@
     "autoprefixer": "10.4.20",
     "contentlayer": "^0.3.4",
     "eslint": "8.39.0",
-    "eslint-config-next": "13.3.1",
+    "eslint-config-next": "15.0.3",
     "i18next": "23.16.4",
     "i18next-browser-languagedetector": "8.0.0",
     "i18next-fs-backend": "^2.3.1",
